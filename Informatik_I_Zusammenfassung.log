@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.29)  1 JUN 2021 17:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.29)  1 JUN 2021 17:17
 entering extended mode
 **./Informatik_I_Zusammenfassung.tex
 (Informatik_I_Zusammenfassung.tex
@@ -1148,29 +1148,30 @@ LaTeX Font Info:    Trying to load font information for T1+cmss on input line 8
 (C:\Users\philh\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmss.fd
 File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
+Package mdframed Info: Not enough space on this page on input line 102.
+
 [1
 
 {C:/Users/philh/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-<Bilder/LFT_1.png, id=16, 539.616pt x 479.99326pt>
+Package mdframed Info: Not enough space on this page on input line 102.
+<Bilder/LFT_1.png, id=15, 539.616pt x 479.99326pt>
 File: Bilder/LFT_1.png Graphic file (type png)
 <use Bilder/LFT_1.png>
 Package pdftex.def Info: Bilder/LFT_1.png  used on input line 106.
 (pdftex.def)             Requested size: 386.95897pt x 344.21062pt.
-<Bilder/LFT_2.png, id=18, 491.436pt x 482.40225pt>
+ [2 <./Bilder/LFT_1.png>]
+<Bilder/LFT_2.png, id=23, 491.436pt x 482.40225pt>
 File: Bilder/LFT_2.png Graphic file (type png)
 <use Bilder/LFT_2.png>
-Package pdftex.def Info: Bilder/LFT_2.png  used on input line 134.
+Package pdftex.def Info: Bilder/LFT_2.png  used on input line 136.
 (pdftex.def)             Requested size: 386.95897pt x 379.86433pt.
-Package mdframed Info: Not enough space on this page on input line 140.
- [2 <./Bilder/LFT_1.png>] [3 <./Bilder/LFT_2.png>]
-Package mdframed Info: Not enough space on this page on input line 140.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-52.
+54.
 
 (C:\Users\philh\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-[4] (Informatik_I_Zusammenfassung.aux)
+[3 <./Bilder/LFT_2.png>] [4] (Informatik_I_Zusammenfassung.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1180,10 +1181,10 @@ Package logreq Info: Writing requests to 'Informatik_I_Zusammenfassung.run.xml'
 
  ) 
 Here is how much of TeX's memory you used:
- 28237 strings out of 479163
- 548376 string characters out of 2853998
- 1692473 words of memory out of 3000000
- 45390 multiletter control sequences out of 15000+600000
+ 28244 strings out of 479163
+ 548596 string characters out of 2853998
+ 1697511 words of memory out of 3000000
+ 45397 multiletter control sequences out of 15000+600000
  419710 words of font info for 69 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  104i,10n,102p,763b,3817s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1198,9 +1199,9 @@ ts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\philh\AppData\Local\MiKT
 eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\philh\AppData\Loca
 l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\philh\AppDat
 a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk>
-Output written on Informatik_I_Zusammenfassung.pdf (4 pages, 234672 bytes).
+Output written on Informatik_I_Zusammenfassung.pdf (4 pages, 235548 bytes).
 PDF statistics:
- 319 PDF objects out of 1000 (max. 8388607)
+ 320 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 
