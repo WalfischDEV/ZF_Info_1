@@ -1,0 +1,173 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools,amssymb,lipsum}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor}
+
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+
+
+
+\definecolor{sealgreen}{HTML}{00c693} 
+\definecolor{redred}{HTML}{C60033}
+
+\usepackage[notes,backend=biber]{biblatex-chicago}
+
+% Shorthands
+\newcommand*\iffdef{\overset{\text{merke}}{\iff}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+% Theorem
+\mdtheorem[
+  linecolor=sealgreen,
+  frametitlefont=\sffamily\bfseries\color{white},
+  frametitlebackgroundcolor= sealgreen ,
+]{Merke}{Merke}[subsection]
+
+\mdtheorem[
+  linecolor=redred,
+  frametitlefont=\sffamily\bfseries\color{white},
+  frametitlebackgroundcolor= redred ,
+]{Wichtig}{Wichtig}[subsection]
+
+
+
+\addbibresource{sample.bib}
+
+\title{Informatik I - Zusammenfassung}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Funktionen und Module}
+
+\subsection{Methoden}
+
+\subsubsection{Felder als Formalparameter}
+
+\begin{Merke}[Call-by-reference (Strukturierte Datentypen)]
+Operationen mit Variablen des methodenaufrufenden Codes selbst.\\
+\textbf{Strukturierte Daten} werden per \textbf{Referenz} übergeben! Änderungen der per Referenz übergebenen Parameter sind im \textbf{aufrufenden Code} sichtbar!\\
+
+Beispiel: Einträge in übergebenen Feldern werden durch Methoden verändert! Das passiert bei reinen Integern (unstrukturierten Daten) nicht!
+\end{Merke}
+
+\subsubsection{Der Laufzeitstapel}
+
+\begin{Merke}[Definition]
+Datenstruktur zur Verwaltung des Speichers der von den Methoden verarbeitet wird.\\
+\textbf{Speicherbereich, in dem lokale Variablen abgespeichert werden.}
+\end{Merke}
+
+\begin{Merke}[Stack Frame - Aktivierungsrahmen]
+ Abschnitt im Laufzeitstapel mit entsprechenden Speicherplätzen wird bei Aufruf \textbf{neu angelegt} und mit \textbf{[V,R]} initialisiert. Wird nach Wertübergabe (z.B. return) an Aufrufer freigegeben. 
+\end{Merke}
+
+\begin{Merke}[Relevante Daten: V,R ]
+\begin{itemize}
+\item \textbf{V:} Werte aller \textbf{lokalen Variablen} (Formalparameter + im Rumpf deklariert)
+\item \textbf{R:} \textcolor{sealgreen}{Rücksprungadresse} = Adresse des Befehls der dem Aufruf folgt (z.B. Vorherige Methode)
+\end{itemize}
+\end{Merke}
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/LFT_1.png}
+  \label{fig:Bild1}
+\end{figure}
+
+Analogie: Aktenstapel
+
+\begin{Merke}[Rekursion]
+Wird durch den Laufzeitstapel ermöglicht.\\
+\textbf{Rekursion} = sich selbst aufrufende Funktionen.\\
+Beispiel: Fakultätsfunktion.\\
+Grundmuster: \textbf{Initialisiere - Terminiere (falls trivial) - Rekurriere}\\
+Jede Rekursion muss zu einem \textbf{Basisfall} führen. Sonst: \textsc{StackOverflowError}
+
+\begin{itemize}
+\item \textbf{Einfache Rekursion:} Lösung wird aus einem kleinen Vorgängerproblem gelöst. Geringe Aufwandreduktion pro Rekursionsschritt.
+\item \textbf{Mehrfache Rekursion:} Gesamtaufwand gleichmäßig aufteilen. Verwende \textbf{Teile- und Herrsche- Algorithmus:}
+\begin{itemize}
+\item Teile Problem in mehrere Unterprobleme ähnlicher Größe
+\item Löse die Unterprobleme durch Teillösungen
+\item Kombiniere die Teillösungen zur Problemlösung
+\end{itemize}
+
+\end{itemize}
+
+\end{Merke}
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/LFT_2.png}
+  \label{fig:Bild1}
+\end{figure}
+
+\begin{Merke}[Rekursionstiefe]
+ist die Tiefe seines Rekursionsbaums (maximale Anzahl von Kanten auf einem Wurzel -> Blatt-Pfad)
+\end{Merke}
+
+\begin{Merke} [Traversierung]
+\begin{itemize}
+\item \textbf{Inorder-Travesierung:} Links - Wurzel - Rechts (z.B. Scheiben)
+\item \textbf{Postorder-Travesierung:} Links - Rechts - Wurzel (z.B. Fibonacci)
+\end{itemize}
+\end{Merke}
+
+\begin{Merke}[Memoisation]
+Wiederholungen vermeiden durch \textbf{zwischenspeichern} in einem Feld.\\
+Beispiel Fibonacci:
+\begin{lstlisting}
+   static int[] f = new int[N];
+    public static void mFib() {
+	f[0] = 0; f[1] = 1; 
+	for (int i = 2; i < N; ++i)
+	    f[i] = f[i-1] + f[i-2];
+    }
+\end{lstlisting}
+
+\end{Merke}
+
+\begin{Wichtig}[Rekursion]
+\begin{itemize}
+\item Es wird ein Basisfall benötigt!
+\item Wir müssen die Problemgröße durch Rekursion reduzieren.
+\item Der Speicherbedarf darf nicht zu groß werden.
+\item Wiederholte Berechnungen vermeiden!
+\end{itemize}
+\end{Wichtig}
+
+
+\end{document}
