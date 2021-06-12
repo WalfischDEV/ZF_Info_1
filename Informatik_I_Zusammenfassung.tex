@@ -77,6 +77,8 @@
 \subsubsection{Felder als Formalparameter}
 
 \begin{Merke}[Call-by-reference (Strukturierte Datentypen)]
+Übergabe der Parameter an Funktionen mithilfe einer Referenz. Änderungen wirken sich auf den ursprünglichen Wert aus!\\
+
 Operationen mit Variablen des methodenaufrufenden Codes selbst.\\
 \textbf{Strukturierte Daten} werden per \textbf{Referenz} übergeben! Änderungen der per Referenz übergebenen Parameter sind im \textbf{aufrufenden Code} sichtbar!\\
 
@@ -170,6 +172,162 @@ Beispiel Fibonacci:
 \item Wiederholte Berechnungen vermeiden!
 \end{itemize}
 \end{Wichtig}
+
+\subsection{Modulare Programmierung}
+Verwendung von (eigens) programmierten Klassen in anderen Programmen/Klassen.
+
+\begin{Merke}[\textsc{public}, Clienten]
+Zugriff wird durch das Schlüsselwort \textsc{public} ermöglicht!\\
+\begin{itemize}
+\item \textbf{Clienten:} Eine Klasse, die Dienste einer anderen Klasse \textbf{C} nutzt, heißt \textbf{Clientklasse} von \textbf{C}.
+\item Klassendefinition: \textsc{public class C} ermöglicht Benutzung aller \textsc{public} Elemente der Klasse durch Clienten.
+\end{itemize}
+\end{Merke}
+
+\begin{Merke}[Modul]
+Ein \textbf{Modul} wird durch den Java-Code einer *.java Datei definiert.\\
+Paradigma der modularen Programmierung:
+\begin{itemize}
+\item Aufteilung in übersichtliche Einheiten.
+\item implementiere, dokumentiere und teste die Module \textbf{einzeln}!
+\item implementiere \textsc{EV(S)A} 
+\end{itemize}
+Idee: Zusammenfassung thematisch ähnlicher Methoden
+\begin{itemize}
+\item Dokumentation in einer \textbf{API}.
+\item \textsc{public class} und \textbf{public} Methoden.
+\item \textbf{Testclient:} \textsc{main} Methode im Modul, die den gesamten Code ausführt und datengesteuerte Tests ermöglicht. 
+\item Nutzerbibliotheken sind keine eigenständige Applikationen!
+\end{itemize}
+
+\end{Merke}
+
+\section{Strukturierte Daten}
+\subsection{Weiteres zu Feldern}
+\begin{Merke}[Heap]
+
+Speicherbereich (dynamischer Speicher), in welchem zur Laufzeit eines Programms Speicherabschnitte angefordert werden können.\\
+Hier werden beispielsweise die \textbf{Feldinhalte} eines Feldes abgespeichert.
+
+\end{Merke}
+
+\begin{Merke}[Abspeicherung von Feldern]
+Die Feldlänge entsteht unter Umständen erst zur Laufzeit. Dementsprechend wird zunächst eine \textbf{Referenz} (=Adresse) (\textsc{new int[n])} auf das neu angelegte Feld in einer Variable abgelegt.\\
+Änderungen?
+\begin{itemize}
+\item Feldinhalt: Ja!
+\item Länge: Nein!
+\item Referenz: Ja!
+\end{itemize}
+Beispiel:\\
+
+
+\end{Merke}
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/Felder1.png}
+  \label{fig:Bild1}
+\end{figure}
+
+\begin{Merke} [Call-by-value-Prinzip]
+Übergabe der Parameter an Funktionen mithilfe einer Kopie. Änderungen wirken sich \textbf{nicht} auf den ursprünglichen Wert aus!\\
+
+Beispiel: Bei der Übergabe eines Feldes wird die Anfangsadresse in die Formalparameter kopiert. 
+\end{Merke}
+
+\begin{Merke}[Sortierung]
+Zwei Einfache Sortierverfahren:\\
+\begin{itemize}
+\item \textbf{Selection-Sort:} Minima nach vorn tauschen:\\
+\begin{lstlisting}
+	public static void sort(double[] f) { // Selectionsort
+		final int N = f.length; 
+		for (int i = 0; i < N-1; i++) {
+	    	int m = i;
+	   	 	for (int j = i+1; j < N; j++) // Index m  des Minimums von ..
+			if ( f[j] < f[m])         // .. [f[i],f[i+1],...,f[N-1]] ..
+		    m = j;                // .. bestimmen und nach Position ..
+	    	double tmp=f[m]; f[m]=f[i]; f[i]=tmp; // .. i tauschen
+		} 
+    }
+\end{lstlisting}
+\item \textbf{Insertion-Sort:} In Anfangsabschnitte sortiert einfügen.
+\begin{lstlisting}
+	public static void sort(double[] f) { // Insertionsort
+      final int N = f.length; 
+      for (int i = 1; i < N; i++) { // f[0], ..., f[i-1] ist bereits sortiert
+	// f[i] an richtiger Stelle einfuegen, d.h soweit noetig ..
+	  for (int j = i; j > 0 && f[j] < f[j-1]; j--) { // f[i] nach links ..
+              double tmp=f[j]; f[j]=f[j-1]; f[j-1]=tmp; // .. "durchtauschen".
+	  }
+      }
+    }  
+\end{lstlisting}
+\end{itemize}
+\end{Merke}
+
+\subsection{Verbunddaten}
+
+\begin{Wichtig}[Verbund]
+Ein \textbf{Verbund} (Synonym: Datensatz) ist ein Datenobjekt, das eine Anzahl von Komponenten beliebigen Typs zusammenfasst.\\
+Beispiel: \textbf{Studenten}: [name, matrikelnummer, fach]
+\end{Wichtig}
+
+\begin{Merke} [Programmierung von Verbund-Daten]
+\begin{itemize}
+\item Bauplan wird durch eine Klasse beschrieben.
+\item Ein Datenobjekt heißt \textbf{Instanz}.
+\item Der aktuelle Zustand einer Instanz wird in den \textbf{Instanzvariablen} gespeichert.
+\begin{lstlisting}
+public class Student{
+	String name; // Instanzvariablen ..
+	int matrikelnr; // .. (auch Instanz- ..
+	String fach; // .. attribute genannt )
+...
+}
+\end{lstlisting}
+\item Konstruktionsaufruf und Zugriff:\\
+\begin{lstlisting}
+  Student s;
+  s = new Student("Fritze Bollmann", 20091234, "Biologie");
+  ...
+  System.out.pritnln(s.name); // Ausgabe: Fritze Bollmann
+\end{lstlisting}
+\end{itemize}
+\end{Merke}
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/Verbunddaten1.png}
+  \label{fig:Bild1}
+\end{figure}
+
+\begin{Merke}[\textsc{this}]
+Das Schlüsselwort \texttt{this} speichert eine Referenz auf das aktuelle Datenobjekt.
+\begin{lstlisting}
+public Student(String name, int matrikelnr, String fach) {
+  this.name = name; // Formalparameter verdecken ..
+  this.matrikelnr = matrikelnr; // .. gleichnamige Attribute!
+  this.fach = fach; // this macht sie wieder unterscheidbar.
+}
+\end{lstlisting}
+\end{Merke}
+
+\begin{Merke}[Zugriffsmodifizierer]
+Schlüsselwörter \texttt{private} und \texttt{public} steuern die Sichtbarkeit von Klassenelementen vom Clientcode aus gesehen.\\
+\begin{itemize}
+\item public-Elemente: sind von jeder anderen Klasse im Klassenpfad sichtbar.
+\item private-Elemente: sind außerhalb der definierenden Klasse nicht sichtbar.
+\end{itemize}
+\end{Merke}
+
+\begin{Merke}[Hash-Codes]
+Drucken von Verbunddaten / Arrays: Ausgabe eines "Indentifikators" Klassenname zusammen mit einem hexadezimalen \textsc{int}-Wert = \textbf{Hashcode} des Datenobjekts (\textbf{Speicheradresse!}).
+\end{Merke}
+
+
+
+
 
 
 \end{document}
