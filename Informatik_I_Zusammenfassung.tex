@@ -322,12 +322,146 @@ Schlüsselwörter \texttt{private} und \texttt{public} steuern die Sichtbarkeit 
 \end{Merke}
 
 \begin{Merke}[Hash-Codes]
-Drucken von Verbunddaten / Arrays: Ausgabe eines "Indentifikators" Klassenname zusammen mit einem hexadezimalen \textsc{int}-Wert = \textbf{Hashcode} des Datenobjekts (\textbf{Speicheradresse!}).
+Drucken von Verbunddaten / Arrays: Ausgabe eines Indentifikators: Klassenname zusammen mit einem hexadezimalen \textsc{int}-Wert = \textbf{Hashcode} des Datenobjekts (\textbf{Speicheradresse!}).
+\end{Merke}
+
+\subsection{Verkettete Datenstrukturen}
+
+\begin{Merke}[Statische Datenstrukturen]
+Elementare und Feld- oder Verbunddaten haben veränderliche Werte aber Struktur und Größe sind \textbf{statisch}, d.h. bleiben über die gesamte Laufzeit gleich:
+\begin{itemize}
+\item \texttt{int x = 42;} - 4 aufeinanderfolgende Bytes
+\item \texttt{int[] f = new int[n];} - aufeinanderfolgende \texttt{int}- Speicherstellen
+\item \texttt{Person p = new Person(..);} - Verbund verschiedener Komponenten
+\end{itemize}
+\end{Merke}
+
+\begin{Merke}[Dynamische Datenstrukturen]
+bestehen aus gleichartigen statischen Datenobjekten (\textbf{Knoten}) veränderlicher Anzahl und Beziehungsstruktur:
+\begin{itemize}
+\item Listen veränderlicher Länge
+\item baumartige Strukturen (linker/rechter Nachfolger...)
+\item Netzwerke beliebiger Nachbarschaften
+\end{itemize}
+\end{Merke}
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/verkettetedatenstrukturen.png}
+  \label{fig:Bild1}
+\end{figure}
+
+\begin{Merke}[Eine einfache Kette]
+Wir benötigen eine \textbf{dynamische Datenstruktur:}\\
+\textbf{Knotentyp und Verkettungstruktur:}
+\begin{lstlisting}
+class ZahlKnoten {
+	double zahl;
+	ZahlKnoten next;
+	public ZahlKnoten (double zahl, ZahlKnoten next){
+		this.zahl = zahl;
+		this.next = next;
+	}
+}
+\end{lstlisting}
+\textbf{Aufbau der Liste:}
+\begin{lstlisting}
+
+\end{lstlisting}
+\begin{lstlisting}
+public class Zahlspeicher {
+	private static ZahlKnoten anfang = null;
+	public static void speichere(double zahl){
+		anfang = new ZahlKnoten(zahl, anfang);
+	}
+	public static void main(String[] args){
+		while (!StdIn.isEmpty()){
+			speichere (StdIn.readDouble()); //Einlesen 47.11, 0.8, 15.0,..
+		}
+		
+		ZahlKnoten iter = anfang;
+		while (iter != null){
+			System.out.println(iter.zahl);
+			iter = iter.next;
+		}
+	}
+}
+\end{lstlisting}
+\end{Merke}
+
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/liste1.png}
+  \label{fig:Bild1}
+\end{figure}
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/liste2.png}
+  \label{fig:Bild1}
+\end{figure}
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/liste3.png}
+  \label{fig:Bild1}
+\end{figure}
+
+\subsection{Speicherorganisation}
+\begin{Merke}[Abläufe, die die Speicherung beeinflussen]
+\begin{itemize}
+\item Compilezeit: Compiler legt anhand der Deklarationen relative Adressen fest.
+\item Ladezeit: statischer Code wird in den Hauptspeicher geladen (z.B. Zuordnung absoluter Speicheradressen an statische Variablen)
+\item Laufzeit: 
+\begin{itemize}
+\item statischer Code bleibt im Speicher
+\item bei jedem Methodenaufruf wird im Laufzeitstapel Platz für lokale Variablen angelegt und initialisiert.
+\item bei jedem Konstruktoraufruf wird im \textbf{Heap} Speicher für erzeugte Datenobjekte angelegt und initialisiert.
+\end{itemize}
+\end{itemize}
+\end{Merke}
+
+\begin{Merke}[Lebenszeit eines Beizeichners]
+Zeit, in der er physikalischen Speicher belegt (innerhalb der Laufzeit)
+\end{Merke}
+
+\begin{Merke}[Speicherbereiche]
+\begin{itemize}
+\item \textbf{Method area:} Speicherung des Bytecodes benötigter Klassen (inkl. ihrer statischen Variablen); \textit{Lebenszeit: Laufzeit der Klassen}
+\item \textbf{Stack: } Speicherung von Aktivierungssätzen von Methoden und Konstruktoren, d.h. lokale Variablen und Rücksprungadressen; \textit{Lebenszeit: Ausführungszeit der Methode /des Konstruktors, Speicherfreigabe wenn unbenötigt! }
+\item  \textbf{Heap: } Speicherung von per Konstruktor angelegten Datensätze; \textit{Lebenszeit: Solange, wie das Datenobjekt durch Referenzkette von MA / Stack erreichbar ist.}
+\end{itemize}
 \end{Merke}
 
 
+\begin{Merke}[Garbage-Collection]
+Verweiste Objekte, die Speicher belegen, aber auf die nicht mehr zugegriffen werden kann werden durch einen \textbf{Garbage-Collector} überwacht und gegebenen falls Speicher freigegeben. 
+\end{Merke}
 
+\section{Objektorientierte Programmierung}
+\subsection{Klassentypen verwenden}
 
+\begin{Merke}[Referenzdatentypen]
+Zugriff erfolgt anhand von Referenzen. Man spricht auch von \textbf{Klassentyp}.\\
+Beispiele: Felder und Verbunde, Strings (Speicherung im Heap).
+\end{Merke}
 
+\begin{Merke} [Klassentypen]
+\begin{itemize}
+\item Standardklassen: Klassentypen, die (so wie \texttt{String}) zur Hava-API gehören.
+\item Nutzerklassen: Klassentypen aus fremden Quellen oder selbst implementierte Klassentypen.
+\end{itemize}
+\end{Merke}
+
+\begin{Merke} [Instanzen]
+Jedes Objekt ist eine \textbf{Instanz} eines Datums des jeweiligen Typs.
+\end{Merke}
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{Bilder/vergleich.png}
+  \label{fig:Bild1}
+\end{figure}
+
+\begin{Merke} [Unterschied zu Verbunddatentypen]
+Wir haben nun lebendige Objekte. Sie haben einen \textbf{Zustand}, beschrieben durch den aktuellen Wert und ein \textbf{Verhalten}, beschrieben durch die Instanzmethoden.
+\end{Merke}
 
 \end{document}

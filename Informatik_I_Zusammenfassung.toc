@@ -18,3 +18,11 @@
 \contentsline {subsection}{\numberline {2.1}Weiteres zu Feldern}{5}{}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2}Verbunddaten}{6}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Verkettete Datenstrukturen}{8}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.4}Speicherorganisation}{9}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Objektorientierte Programmierung}{10}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Klassentypen verwenden}{10}{}%
